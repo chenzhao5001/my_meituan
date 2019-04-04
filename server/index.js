@@ -1,7 +1,8 @@
+const router = require('./interface/city')
+
 const Koa = require('koa')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
-
 const app = new Koa()
 
 // Import and Set Nuxt.js options
@@ -24,6 +25,8 @@ async function start() {
   } else {
     await nuxt.ready()
   }
+  // app.use(city.router)
+  app.use(router.routes()).use(router.allowedMethods());
 
   app.use(ctx => {
     ctx.status = 200
